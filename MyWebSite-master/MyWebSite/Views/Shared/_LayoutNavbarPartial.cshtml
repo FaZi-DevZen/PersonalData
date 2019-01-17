@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+@using MyWebSite.Datas.Config.Home
+@inject IViewLocalizer Localizer
+@model MyWebSite.ViewModels.LayoutVM
+@inject IOptions<NavBarMenus> NavBarMenus
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="images/anonymous.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>@SharedLocalizer[Model.NickName]</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> @SharedLocalizer[Model.NetState]</a>
+            </div>
+        </div>
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">菜单导航</li>
+
+            @await Html.PartialAsync("_NavMenu", NavBarMenus.Value)
+
+            <li class="header">相关资料</li>
+            <li><a href="https://blog.lancel0t.cn/" target="_blank"><i class="fa fa-chrome text-aqua"></i> <span>@SharedLocalizer["IndependentBlog"]</span></a></li>
+            <li><a href="http://www.cnblogs.com/lizzie-xhu/" target="_blank"><i class="fa fa-btc text-yellow"></i> <span>@SharedLocalizer["CnBlogs"]</span></a></li>
+            <li><a href="mailto:286540167@qq.com"><i class="fa fa-envelope text-danger"></i> <span>@SharedLocalizer["Email"]</span></a></li>
+            <li><a href="https://github.com/lizzie2008/MyWebSite" target="_blank"><i class="fa fa-book text-blue"></i> <span>@SharedLocalizer["GitHubForProject"]</span></a></li>
+            <li><a href="/static/resume.docx" target="_blank"><i class="fa fa-chrome text-light-blue"></i> <span>@SharedLocalizer["MyResume"]</span></a></li>
+        </ul>
+    </section>
+</aside>

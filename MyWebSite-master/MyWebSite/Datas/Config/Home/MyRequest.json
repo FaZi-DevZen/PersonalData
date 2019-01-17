@@ -1,0 +1,59 @@
+﻿{
+  "MyRequest": {
+    "ApiRequests": [
+      {
+        "ApiCode": "MobileLocation",
+        "ApiName": "手机号码归属地",
+        "Url": "http://apis.juhe.cn/mobile/get",
+        "Methord": "GET",
+        "ApiParas": [
+          {
+            "ParaName": "key",
+            "ParaType": "string",
+            "Required": true,
+            "Description": "用户认证token",
+            "ParaValue": "<TokenMobileApi>"
+          },
+          {
+            "ParaName": "phone",
+            "ParaType": "int",
+            "Required": true,
+            "Description": "需要查询的手机号码或手机号码前7位",
+            "ParaValue": "15000000000"
+          },
+          {
+            "ParaName": "dtype",
+            "ParaType": "string",
+            "Required": false,
+            "Description": "返回数据的格式,xml或json，默认json",
+            "ParaValue": null
+          }
+        ]
+      },
+      {
+        "ApiCode": "BaiduGetSites",
+        "ApiName": "百度统计-站点列表",
+        "Url": "https://api.baidu.com/json/tongji/v1/ReportService/getSiteList",
+        "Methord": "POST",
+        "ApiParas": null,
+        "ApiDatas": "{\"header\":{\"account_type\":1,\"password\":\"<PasswordBaiduApi>\",\"token\":\"<TokenBaiduApi>\",\"username\":\"<UserNameBaiduApi>\"},\"body\":{}}"
+      },
+      {
+        "ApiCode": "BaiduGetVisitDistrict",
+        "ApiName": "百度统计-地域分布统计",
+        "Url": "https://api.baidu.com/json/tongji/v1/ReportService/getData",
+        "Methord": "POST",
+        "ApiParas": null,
+        "ApiDatas": "{\"header\":{\"account_type\":1,\"password\":\"<PasswordBaiduApi>\",\"token\":\"<TokenBaiduApi>\",\"username\":\"<UserNameBaiduApi>\"},\"body\":{\"site_id\":11584544,\"method\":\"visit/district/a\",\"start_date\":\"30daysago\",\"end_date\":\"today\",\"metrics\":\"pv_count,pv_ratio,visit_count,visitor_count,new_visitor_count,new_visitor_ratio,ip_count,bounce_ratio,avg_visit_time,avg_visit_pages,trans_count,trans_ratio\",\"order\":\"pv_count,desc\",\"max_results\":0}}"
+      },
+      {
+        "ApiCode": "BaiduGetTrend",
+        "ApiName": "百度统计-趋势分析",
+        "Url": "https://api.baidu.com/json/tongji/v1/ReportService/getData",
+        "Methord": "POST",
+        "ApiParas": null,
+        "ApiDatas": "{\"header\":{\"account_type\":1,\"password\":\"<PasswordBaiduApi>\",\"token\":\"<TokenBaiduApi>\",\"username\":\"<UserNameBaiduApi>\"},\"body\":{\"site_id\":11584544,\"method\":\"trend/time/a\",\"start_date\":\"30daysago\",\"end_date\":\"today\",\"metrics\":\"pv_count,pv_ratio,visit_count,visitor_count,new_visitor_count,new_visitor_ratio,ip_count,bounce_ratio,avg_visit_time,avg_visit_pages,trans_count,trans_ratio,avg_trans_cost,income,profit,roi\",\"gran\":\"day\",\"max_results\":0}}"
+      }
+    ]
+  }
+}

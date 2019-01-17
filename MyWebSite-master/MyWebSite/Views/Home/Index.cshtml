@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@using MyWebSite.ViewModels
+@inject UserManager<ApplicationUser> UserManagerIns
+@{
+    ViewData["Title"] = SharedLocalizer["Welcome"];
+    Layout = null;
+
+    var user = await UserManagerIns.GetUserAsync(User);
+    var vm = new LayoutVM { NetState = Localizer["Online"].Value };
+    if (user != null)
+    {
+        vm.NickName = user.NickName;
+    }
+    else
+    {
+        vm.NickName = Localizer["Guest"].Value;
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - LanceL0t</title>
+
+    @await Html.PartialAsync("_SiteCssPartial")
+</head>
+<body class="hold-transition skin-black sidebar-mini pace-done" data-ng-app="app">
+    <div class="wrapper">
+        <!-- 顶部区域 -->
+        @await Html.PartialAsync("_LayoutHeaderPartial", vm)
+        <!-- 导航栏 -->
+        @await Html.PartialAsync("_LayoutNavbarPartial", vm)
+        <!-- 内容区域 -->
+        <div class="content-wrapper">
+            <div ui-view></div>
+        </div>
+        <!-- 底部区域 -->
+        @await Html.PartialAsync("_LayoutFooterPartial")
+        <!-- 侧边栏 -->
+        @await Html.PartialAsync("_LayoutSidebarPartial")
+    </div>
+    @await Html.PartialAsync($"_SiteScriptsPartial")
+</body>
+</html>

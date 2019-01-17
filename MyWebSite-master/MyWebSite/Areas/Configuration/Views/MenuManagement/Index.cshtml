@@ -1,0 +1,180 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using MyWebSite
+@using MyWebSite.ViewModels
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model MyWebSite.Areas.Configuration.ViewModels.MenuIndexVM
+@{
+    ViewData["Title"] = "菜单列表";
+
+    var breadcrumb = new BreadCrumb("菜单列表", "Version 2.0", new List<NavCrumb>
+{
+new NavCrumb(name:"菜单管理",url: "/Configuration/Menu"),
+new NavCrumb(name:"菜单列表"),
+});
+    ViewBag.BreadCrumb = breadcrumb;
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles{
+    <link rel="stylesheet" href="~/lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/AdminLTE/bower_components/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap3-dialog/dist/css/bootstrap-dialog.css" />
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box with-border">
+            <form class="form" asp-action="Index">
+                <div class="box-header">
+                    <h3 class="box-title"><i class="fa fa-search margin-r-5">查询条件</i></h3>
+                    <div class="box-tools pull-right">
+                        <button type="submit" class="btn btn-success margin-r-5"><i class="fa fa-search margin-r-5"></i>查询</button>
+                        <a class="btn btn-primary" href="/Configuration/Menu/Create"><i class="fa fa-plus margin-r-5"></i>新建</a>
+                    </div>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="Query.QName">菜单名称:</label>
+                                <input asp-for="Query.QName" class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="Query.QId">菜单编码:</label>
+                                <input asp-for="Query.QId" class="form-control input-sm">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="Query.QParentId">父级菜单:</label>
+                                <select asp-for="Query.QParentId" class="form-control input-sm select2" asp-items="ViewBag.ParentIds">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label asp-for="Query.QMenuType">菜单类型:</label>
+                                <select asp-for="Query.QMenuType" class="form-control input-sm select2" asp-items="ViewBag.MenuTypes">
+                                    <option value="">-- 请选择 --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="box-body">
+                <table class="table table-striped table-bordered table-hover datatables" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>菜单名称</th>
+                            <th>菜单编号</th>
+                            <th>父级编号</th>
+                            <th>组内排序</th>
+                            <th>菜单类型</th>
+                            <th>菜单图标</th>
+                            <th>菜单路径</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            var index = 0;
+                        }
+                        @foreach (var item in Model.Menus)
+                        {
+                            index++;
+                            <tr>
+                                <td>
+                                    @index.ToString("D3")
+                                </td>
+                                <td>
+                                    @Html.ActionLink(SharedLocalizer[item.Name].Value, "Details", new { id = @item.Id })
+                                </td>
+                                <td>
+                                    <span>@item.Id</span>
+                                </td>
+                                <td>
+                                    <span>@Html.DisplayFor(modelItem => item.ParentId)</span>
+                                </td>
+                                <td>
+                                    <span>@item.IndexCode</span>
+                                </td>
+                                <td>
+                                    <span>@item.MenuType</span>
+                                </td>
+                                <td>
+                                    <i class="fa @item.Icon" data-toggle="tooltip" data-placement="right" title="@item.Icon"></i>
+                                </td>
+                                <td>
+                                    <i class="fa fa-ellipsis-h" data-toggle="tooltip" data-placement="left" title="@Html.DisplayFor(modelItem => item.Url)"></i>
+                                </td>
+                                <td>
+                                    @Html.ActionLink("编辑", "Edit", new { id = @item.Id })|
+                                    @Html.ActionLink("详情", "Details", new { id = @item.Id })|
+                                    <a href="#" onclick="onDelete('@item.Id', '@item.Name');">删除</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js"></script>
+    <script src="~/lib/bootstrap3-dialog/dist/js/i18n/zh-CN.js"></script>
+    <script src="~/lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.js"></script>
+    <script src="~/lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.js"></script>
+    <script src="~/lib/AdminLTE/bower_components/select2/dist/js/select2.full.min.js"></script>
+    <script src="~/lib/AdminLTE/bower_components/select2/dist/js/i18n/zh-CN.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        //表格控件初始化
+        var table = $('.datatables').DataTable({
+            "lengthChange": false,
+            "searching": false,
+            "scrollX": true,
+            "iDisplayLength": 50,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.16/i18n/Chinese.json"
+            }
+        })
+        function onDelete(id, name) {
+            BootstrapDialog.show({
+                message: '确认删除菜单-' + name + '[' + id + ']？',
+                size: BootstrapDialog.SIZE_SMALL,
+                draggable: true,
+                buttons: [
+                    {
+                        icon: 'fa fa-check',
+                        label: '确定',
+                        cssClass: 'btn-primary',
+                        action: function (dialogRef) {
+                            dialogRef.close();
+                            $.ajax({
+                                type: 'POST',
+                                url: '/Configuration/Menu/Delete',
+                                data: { id: id },
+                                success: function () {
+                                    location.reload();
+                                }
+                            });
+                        }
+                    }, {
+                        icon: 'fa fa-close',
+                        label: '取消',
+                        action: function (dialogRef) {
+                            dialogRef.close();
+                        }
+                    }
+                ]
+            });
+        }
+    </script>
+}

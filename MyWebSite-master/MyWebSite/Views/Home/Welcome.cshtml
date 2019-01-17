@@ -1,0 +1,139 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "欢迎";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Cache-Control" content="max-age=259200, must-revalidate" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="googlebot" content="archive" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewData["Title"] - LanceL0t</title>
+    <meta name="description" content="Big Deal Engine - probably, the best e-Sports site engine in the world">
+    <meta name="keywords" content="E-sports, e-Sports website, computer sports website, bets on e-Sports">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/lib/easyrocketstudio/dist/css/main.css">
+</head>
+<body>
+    <div id='loader' class='fd-loader' style='position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 50; background: #041527 url("/lib/easyrocketstudio/dist/img/bg-main.png") 0 0 repeat;'>
+        <span class='tossing' style='position: fixed; top: 50%; left: 50%; z-index: 51; width: 136px; margin-left: -68px; margin-top: -64px; height: 129px; background: url("/lib/easyrocketstudio/dist/img/loader-bg.png") 0 0 no-repeat;'></span>
+        <div class='cow' style='position: fixed; top: 80%; margin-top: -42px; left: 50%; z-index: 49; width: 46px; margin-left: -23px; height: 29px; background: url("/lib/easyrocketstudio/dist/img/loader-cow.png") 0 0 no-repeat;'></div>
+    </div>
+    <div class="menu-container">
+        <a href="" class="btn-menu j-btn-menu" data-menu='site-menu'></a>
+        <div class="menu-list" id='site-menu'>
+            <ul>
+                <li><a href="#0" data-screen="1">关于</a></li>
+                <li><a href="#0" data-screen="2">项目目录</a></li>
+                <li><a href="#0" data-screen="3">系统模块</a></li>
+                <li><a href="#0" data-screen="6">开发者资源</a></li>
+                <li><a href="#0" data-screen="7">联系博主</a></li>
+                <li><a href="#0" data-screen="8">帮助与支持</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="page-wrapper page">
+        <div class="user-menu">
+            <a href="#" class="btn btn-small">帮助文档</a>
+        </div>
+        <img src="/lib/easyrocketstudio/dist/img/asteroids-left.png" alt="pic" class="a-left">
+        <img src="/lib/easyrocketstudio/dist/img/asteroids-right.png" alt="pic" class="a-right">
+        <img src="/lib/easyrocketstudio/dist/img/asteroids-left.png" alt="pic" class="b-left">
+        <img src="/lib/easyrocketstudio/dist/img/asteroids-right.png" alt="pic" class="b-right">
+
+        <div class="container" style='padding-top: 0;'>
+            <div class="center">
+                <div class="screen-7">
+                    <div class="block" style='margin-top: 0;'>
+                        <h3 class="title title-medium">欢 迎</h3>
+                    </div>
+                    <div class="planet-3-area centered">
+                        <a href="/">
+                            <canvas id="canvasMagneto" class="magneto"></canvas>
+                            <div class="planet-3-obits">
+                                <p class="text-huge"> Lancel0t </p>
+                                <p class="title title-small text-blink">点击访问首页</p>
+                            </div>
+                        </a>
+
+                        <div class="plus plus-1">
+                            <span>Github 更多项目</span>
+                            <p class='text-small'>2018.01.01更新</p>
+                        </div>
+                        <div class="plus plus-2">
+                            <span>最新版本</span>
+                            <p class='text-small'>Version:1.0.0</p>
+                        </div>
+                        <div class="block-bordered text-small">
+                            <p>You can get ideas from others, thinking of you, the casting mold is thought must be your own. -- Rahm</p>
+                            <br/><p>你可以从别人那里得来思想，你的思想方法，即熔铸思想的模子却必须是你自己的。—— 拉姆</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="screen-8">
+            <div class="block-bottom">
+                <div class="block-bottom-top"></div>
+                <div class="block-bottom-main">
+                    <div id="clouds">
+                        <div class="cloud cloud-1"></div>
+                        <div class="cloud cloud-2"></div>
+                        <div class="cloud cloud-3"></div>
+                        <div class="cloud cloud-4"></div>
+                        <div class="cloud cloud-5"></div>
+                        <div class="cloud cloud-6"></div>
+                    </div>
+                    <div class="container">
+                        <div class="observatory">
+                            <div class="navigator"></div>
+                        </div>
+                        <div class="block-bottom-content">
+                            <a href="/downloads/easyrocketstudio-en.pdf" target='_blank' class="btn btn-small">Download presentation</a>
+                            <h3 class="title title-medium">Let's talk business</h3>
+                            <p class="text"> To get started just conact us via e-mail and our managers will provide you with all necessary information for start of your own e-Sports platform. </p>
+                            <div class="questions">
+                                <p>If you have questions, adress them here</p> <a href="mailto:34878936@qq.com">34878936@qq.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper-nebula">
+            <div id="container" class="container-nebula">
+                <div id="output" class="container-nebula"> </div>
+            </div>
+        </div> <canvas id="bg-stars" class="bg-stars"> </canvas> <canvas id="world" class="planet-3-orbit" width="800" height="600"></canvas> <canvas id="world-2" class="planet-3-orbit" width="800" height="600"></canvas> <canvas id="world-3" class="planet-3-orbit" width="800" height="600"></canvas> <canvas id="stars-cursor"></canvas>
+    </div>
+    <script type='text/javascript'>
+        var isMobile = false;
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            isMobile = true;
+        }
+    </script>
+    <script src="/lib/easyrocketstudio/dist/js/jquery-2.1.1.min.js"></script>
+    <script src="/lib/easyrocketstudio/dist/js/pixi.js"></script>
+    <script src="/lib/easyrocketstudio/dist/js/bg-stars-pixi.js"></script>
+    <script src="/lib/easyrocketstudio/dist/js/magneto-min.js"></script>
+    <script src="/lib/easyrocketstudio/dist/js/main-min.js"></script>
+    <script src="/lib/easyrocketstudio/dist/js/asteroids-min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.cookie.js"></script>
+    <script type='text/javascript'>
+        $(document).ready(function () {
+            $("#loader span").delay(1000).animate({ "top": "51%" },
+                100,
+                function () {
+                    $(".cow").animate({ "margin-top": "300px", "opacity": 0 }, 500);
+                    $("#loader span").animate({ "top": -200 },
+                        700,
+                        function () {
+                            $("#loader").fadeOut("fast");
+                        });
+                });
+        })
+    </script>
+</body>
+</html>

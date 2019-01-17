@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using MyWebSite.Datas.Config.Home
+@model NavBarMenus
+@inject IHtmlLocalizer<SharedResource> SharedLocalizer
+
+
+@foreach (var navMenu in Model.NavMenus)
+{
+    if (navMenu.SubNavMenus != null && navMenu.SubNavMenus.Any())
+    {
+        <li class="treeview">
+            <a href="#">
+                <i class="fa @navMenu.Icon"></i><span>@SharedLocalizer[navMenu.Name]</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                @await Html.PartialAsync("_NavMenu", new NavBarMenus { NavMenus = navMenu.SubNavMenus })
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li>
+            @if (navMenu.TemplateUrl != null && navMenu.TemplateUrl.StartsWith("http"))
+            {
+                <a href="@navMenu.TemplateUrl" target="_blank">
+                    <i class="fa @navMenu.Icon"></i><span>@SharedLocalizer[navMenu.Name]</span>
+                </a>
+            }
+            else
+            {
+                <a ui-sref="@navMenu.TemplateUrl">
+                    <i class="fa @navMenu.Icon"></i><span>@SharedLocalizer[navMenu.Name]</span>
+                </a>
+            }
+        </li>
+    }
+}
